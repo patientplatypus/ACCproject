@@ -1,24 +1,24 @@
 <template>
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
-    <div class='topbox bg-blue-2 shadow-15' v-bind:style="{fontSize: '4vh', display: 'flex', flexDirection:'row', paddingTop: '20%'}">
+    <div class='topbox bg-blue-2 shadow-15' v-bind:style="{fontSize: '4vh', display: 'flex', flexDirection:'row'}">
       <div v-bind:style='{flex: "1"}'></div>
-      <div v-bind:style='{flex: "1"}'>
+      <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
         <router-link class='routerlink text-cyan-5' to="/aboutPage">About</router-link>
       </div>
-      <div v-bind:style='{flex: "1"}'>
+      <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
         <router-link class='routerlink text-cyan-5' to="/massUploadPage">Upload</router-link>
       </div>
-      <div v-bind:style='{flex: "1"}'>
+      <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
         <router-link class='routerlink text-cyan-5' to="/massImportPage">Import</router-link>
       </div>
-      <div v-bind:style='{flex: "1"}'>
+      <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
         <router-link class='routerlink text-cyan-5' to="/LoginPage">Login</router-link>
       </div>
-      <div v-bind:style='{flex: "1"}'>
+      <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
         <router-link class='routerlink text-cyan-5' to="/MapPage">Map</router-link>
       </div>
-      <div v-bind:style='{flex: "1"}'></div>
+      <div v-bind:style='{flex: "1", paddingTop: "10px"}'></div>
     </div>
     <router-view class='contentbox'></router-view>
   </div>
@@ -55,7 +55,7 @@ a{
   grid-column: 1 / 3;
   grid-row: 2 / 3;
   /*background-color: #FAF0CA;*/
-  min-height: 94vh;
+  /*min-height: 94vh;*/
   overflow: hidden;
   overflow-y: scroll;
 }
