@@ -1,8 +1,8 @@
 <template>
   <div class="import">
-    <h1>{{ msg }}</h1>
+    <h1 v-bind:style="{color:'#87d5df'}">{{ msg }}</h1>
     <div v-if="areweloggedin === false">
-      <p> Woops! Looks like you did not log in. Sad panda. 🐼 </p>
+      <p v-bind:style='{fontSize:"16pt"}'> Woops! Looks like you did not log in. Sad panda. 🐼 </p>
     </div>
     <div v-if="areweloggedin === true">
 

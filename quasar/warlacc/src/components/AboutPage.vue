@@ -5,7 +5,7 @@
       enter="fadeIn"
       leave="fadeOut"
     >
-      <h1>Welcome to About Page</h1>
+      <h1 v-bind:style="{color:'#87d5df'}">Welcome to About Page</h1>
     </q-transition>
 
     <q-transition
@@ -13,7 +13,7 @@
       enter="slideInLeft"
       leave="slideOutRight"
     >
-      <q-card v-bind:style="{width:'80vw', marginRight:'10vw', marginLeft:'10vw'}">
+      <q-card class="bg-blue-3" v-bind:style="{width:'80vw', marginRight:'10vw', marginLeft:'10vw'}">
         <q-card-title>
           <p>Pirate Ipsum</p>
         </q-card-title>
@@ -35,7 +35,7 @@
       leave="slideOutLeft"
       v-if='secondAnimation === true'
     >
-      <q-card v-bind:style="{width:'80vw', marginRight:'10vw', marginLeft:'10vw'}">
+      <q-card class="bg-blue-3" v-bind:style="{width:'80vw', marginRight:'10vw', marginLeft:'10vw'}">
         <q-card-title>
           <p>Ninja Ipsum</p>
         </q-card-title>

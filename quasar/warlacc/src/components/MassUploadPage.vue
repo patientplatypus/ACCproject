@@ -1,24 +1,32 @@
 <template>
   <div class="upload">
     <div v-bind:style='{width:"80vw", marginLeft:"10vw", marginRight:"10vw", textAlign:"center"}'>
-      <h1>{{ msg }}</h1>
+      <h1 v-bind:style="{color:'#87d5df'}">{{ msg }}</h1>
     </div>
     <div v-if="areweloggedin === false">
-      <p> Woops! Looks like you did not log in. Sad panda. 🐼 </p>
+      <p v-bind:style='{fontSize:"16pt"}'> Woops! Looks like you did not log in. Sad panda. 🐼 </p>
     </div>
     <div v-if="areweloggedin === true">
-      <input type="file" @change="e=>onFileChange(e)">
+      <input type="file" v-bind:style='{height:"10vh", width:"20vw", marginRight:"40vw", marginLeft:"40vw", backgroundColor:"rgb(144,202,249)"}' @change="e=>onFileChange(e)"/>
+
       <div v-if="uploadUpdated === true">
-        <h2>
-          Sweet! Table to upload is shown below.
-        </h2>
-        <h3>
-          To modify the table click in a cell, modify it, then hit enter!
-        </h3>
-        <h3>
-          Once you are ready to upload to the database hit the upload button like a boss 🤠
-        </h3>
-        <table class="q-table striped-odd highlight" v-bind:style='{textAlign:"center", marginRight:"10vw", marginLeft:"10vw", width:"80vw"}'>
+        <q-card class="bg-blue-3" v-bind:style='{textAlign:"center", marginRight:"10vw", marginLeft:"10vw", width:"80vw"}'>
+          <q-card-title>
+            <h2>
+              ✨🍪Sweet🍭✨ Table to upload is shown below.
+            </h2>
+          </q-card-title>
+          <q-card-main>
+            <h3>
+              To modify the table click in a cell, modify it, then hit enter!
+            </h3>
+            <h3>
+              Once you are ready to upload to the database hit the upload button like a boss. 🤠
+            </h3>
+          </q-card-main>
+        </q-card>
+        <br/>
+        <table class="q-table striped-odd highlight bg-blue-3" v-bind:style='{textAlign:"center", marginRight:"10vw", marginLeft:"10vw", width:"80vw"}'>
           <thead>
             <tr>
               <th class="text-right">Latitude</th>
@@ -69,6 +77,9 @@ import {
   QIcon,
   QField,
   QTooltip,
+  QCard,
+  QCardTitle,
+  QCardMain,
   QPopover
 } from 'quasar'
 
@@ -81,6 +92,9 @@ export default {
     QIcon,
     QField,
     QTooltip,
+    QCard,
+    QCardTitle,
+    QCardMain,
     QPopover
   },
   data () {

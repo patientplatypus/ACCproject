@@ -1,8 +1,8 @@
 <template>
   <div class="map">
-    <h1>{{ msg }}</h1>
+    <h1 v-bind:style="{color:'#87d5df'}">{{ msg }}</h1>
     <div v-if="areweloggedin === false">
-      <p> Woops! Looks like you did not log in. Sad panda. 🐼 </p>
+      <p v-bind:style='{fontSize:"16pt"}'> Woops! Looks like you did not log in. Sad panda. 🐼 </p>
     </div>
     <div v-if="areweloggedin === true" v-bind:style='{textAlign:"center", width:"100vw", display:"flex", flexDirection:
     "row"}'>
@@ -53,12 +53,14 @@
         <div class='shadow-10 bg-blue-2' v-bind:style='{height: "70vh", width:
         "25vw"}'>
           <div v-if="markerclicked === false">
-            <p>
+            <br/>
+            <p v-bind:style='{fontSize:"16pt"}'>
               Click a marker to change its' details!
             </p>
           </div>
           <div v-if="markerclicked === true">
-            <p>
+            <br/>
+            <p v-bind:style='{fontSize:"16pt"}'>
               Change this markers' details!
             </p>
             <div v-bind:style="{display: 'flex', flexDirection:'column', width:'90%', marginRight:'5%', marginLeft:'5%'}">

@@ -1,41 +1,57 @@
 <template>
   <div class="login">
-    <div class='' v-bind:style="{display: 'flex', textAlign:'center', flexDirection:'column', marginTop:'5vh', marginRight: '25vw', marginLeft:'25vw', textAlign: 'center', paddingLeft:'5vw', paddingRight:'10vw', paddingTop:'5vh', paddingBottom:'5vh'}">
-      <h1>{{ msg }}</h1>
-      <div v-if="areweloggedin === false">
-
-        <div v-bind:style='{flex: "1", textAlign:"center"}'>
-           <q-input v-model="username" inverted color="blue" v-on:click="clearValue('username')" :before="[{icon: 'mood', handler () {}}]"/>
-        </div>
-        <div v-bind:style='{flex: "1", textAlign:"center"}'>
-           <q-input v-model="password" v-on:click="clearValue('password')" float-label="enter password" inverted color="blue" type="password"/>
-        </div>
-
-        <div v-bind:style='{flex: "1",  textAlign:"center"}'>
-          <div v-bind:style="{display: 'flex', flexDirection:'row'}">
-            <div v-bind:style='{flex: "1"}'>
-              <q-btn color="blue-3" big v-on:click="userButton('new', $event)">
-                New User
-              </q-btn>
+    <div class='' v-bind:style='{paddingLeft:"10vw", paddingRight:"10vw"}'>
+      <q-transition
+        appear
+        enter="fadeIn"
+        leave="fadeOut"
+      >
+        <div v-if="areweloggedin === false">
+          <q-card color="blue-2" v-bind:style='{padding:"2.5vw", position:"absolute", left:"20vw", top:"20vw", width:"60vw"}'>
+            <div v-bind:style='{flex: "1", textAlign:"center"}'>
+               <q-input v-model="username" inverted color="blue" v-on:click="clearValue('username')" :before="[{icon: 'mood', handler () {}}]"/>
             </div>
-            <div v-bind:style='{flex: "1"}'>
-              <q-btn color="blue-3" big v-on:click="userButton('login', $event)">
-                Log In
-              </q-btn>
+            <div v-bind:style='{flex: "1", textAlign:"center"}'>
+               <q-input v-model="password" v-on:click="clearValue('password')" float-label="enter password" inverted color="blue" type="password"/>
             </div>
-          </div>
-        </div>
 
-      </div>
-      <div v-if="areweloggedin === true">
-        <div v-bind:style="{display: 'flex', flexDirection:'row'}">
-          <div v-bind:style='{flex: "1"}'>
-            <q-btn color="blue-3" big v-on:click="userButton('logout', $event)">
-              Log Out
-            </q-btn>
-          </div>
+            <div v-bind:style='{flex: "1",  textAlign:"center"}'>
+              <div v-bind:style="{display: 'flex', flexDirection:'row'}">
+                <div v-bind:style='{flex: "1"}'>
+                  <q-btn color="blue" big v-on:click="userButton('new', $event)">
+                    New User
+                  </q-btn>
+                </div>
+                <div v-bind:style='{flex: "1"}'>
+                  <q-btn color="blue" big v-on:click="userButton('login', $event)">
+                    Log In
+                  </q-btn>
+                </div>
+              </div>
+            </div>
+          </q-card>
         </div>
-      </div>
+      </q-transition>
+
+      <q-transition
+        appear
+        enter="fadeIn"
+        leave="fadeOut"
+      >
+        <div v-if="areweloggedin === true">
+          <q-card color="blue-2" v-bind:style='{padding:"2.5vw", position:"absolute", left:"20vw", top:"20vw", width:"60vw"}'>
+            <div v-bind:style="{display: 'flex', flexDirection:'row'}">
+              <div v-bind:style='{flex: "1"}'>
+                <q-btn color="blue" big v-on:click="userButton('logout', $event)">
+                  Log Out
+                </q-btn>
+              </div>
+            </div>
+          </q-card>
+        </div>
+      </q-transition>
+
+
 
     </div>
 
@@ -52,7 +68,12 @@ import {
   QIcon,
   QField,
   QTooltip,
-  QPopover
+  QPopover,
+  QTransition,
+  QCard,
+  QCardTitle,
+  QCardMain,
+  QSelect
 } from 'quasar'
 export default {
   components: {
@@ -62,7 +83,12 @@ export default {
     QIcon,
     QField,
     QTooltip,
-    QPopover
+    QPopover,
+    QTransition,
+    QCard,
+    QCardTitle,
+    QCardMain,
+    QSelect
   },
   name: 'loginPage',
   data () {
