@@ -1,26 +1,26 @@
 <template>
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
-    <img src="./assets/ACClogo.png" v-bind:style="{position:'absolute', zIndex:'999', left:'2vw', top:'2.5vh', width: '15vw', height: '10vh'}"/>
-    <div class='topbox bg-blue-2 shadow-15' v-bind:style="{fontSize: '4vh', display: 'flex', flexDirection:'row'}">
-      <div v-bind:style='{flex: "1"}'></div>
-      <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
-        <router-link class='routerlink text-cyan-5' to="/aboutPage">About</router-link>
+    <img src="./assets/ACClogo.png" v-bind:style="{position:'absolute', zIndex:'999', left:'2vw', top:'0vh', width: '15vw', height: '10vh'}"/>
+      <div class='topbox shadow-15' v-bind:style="{fontSize: '4vh', display: 'flex', flexDirection:'row', backgroundColor: 'rgb(21,65,114)'}">
+        <div v-bind:style='{flex: "1"}'></div>
+        <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
+          <router-link class='routerlink text-cyan-5' to="/aboutPage">About</router-link>
+        </div>
+        <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
+          <router-link class='routerlink text-cyan-5' to="/massUploadPage">Upload</router-link>
+        </div>
+        <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
+          <router-link class='routerlink text-cyan-5' to="/massImportPage">Import</router-link>
+        </div>
+        <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
+          <router-link class='routerlink text-cyan-5' to="/LoginPage">Login</router-link>
+        </div>
+        <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
+          <router-link class='routerlink text-cyan-5' to="/MapPage">Map</router-link>
+        </div>
+        <div v-bind:style='{flex: "1", paddingTop: "10px"}'></div>
       </div>
-      <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
-        <router-link class='routerlink text-cyan-5' to="/massUploadPage">Upload</router-link>
-      </div>
-      <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
-        <router-link class='routerlink text-cyan-5' to="/massImportPage">Import</router-link>
-      </div>
-      <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
-        <router-link class='routerlink text-cyan-5' to="/LoginPage">Login</router-link>
-      </div>
-      <div v-bind:style='{flex: "1", paddingTop: "10px"}'>
-        <router-link class='routerlink text-cyan-5' to="/MapPage">Map</router-link>
-      </div>
-      <div v-bind:style='{flex: "1", paddingTop: "10px"}'></div>
-    </div>
     <router-view class='contentbox bg-blue shadow-up-15'></router-view>
   </div>
 </template>
