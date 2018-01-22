@@ -41,7 +41,7 @@ export default {
   grid-template-rows: 10vh 90vh;
   grid-gap: 0vw;
   overflow: hidden;
-  background-color: #fff;
+  background-color: #f1f1f1;
   color: #444;
 }
 a{

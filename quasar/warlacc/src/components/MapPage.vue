@@ -1,17 +1,27 @@
 <template>
   <div class="map">
-    <h1 v-bind:style="{color:'#87d5df'}">{{ msg }}</h1>
-    <div v-if="areweloggedin === false">
-      <p v-bind:style='{fontSize:"16pt"}'> Woops! Looks like you did not log in. Sad panda. 🐼 </p>
+    <!-- <h1 v-bind:style="{color:'#87d5df'}">{{ msg }}</h1> -->
+
+    <div v-if="(alert1 && areweloggedin === true)" class='alert-container'>
+      <div class='flex-1'></div>
+      <div class='alert acc-shadow'><h5 class='alert-title'>10 NEW APARTMENTS UPDATED WITH NEW PRICES<span v-on:click="alert1=!alert1" class='alert-x'>DISMISS</span></h5></div>
+      <div class='flex-1'></div>
     </div>
-    <div v-if="areweloggedin === true" v-bind:style='{textAlign:"center", width:"100vw", display:"flex", flexDirection:
-    "row"}'>
+    <div v-if="(alert2 && areweloggedin === true)" class='alert-container'>
+      <div class='flex-1'></div>
+      <div class='alert acc-shadow alert-dark'><h5 class='alert-title'>3 NEW APARTMENTS LISTED AT LOWER PRICES<span v-on:click="alert2=!alert2" class='alert-x'>DISMISS</span></h5></div>
+      <div class='flex-1'></div>
+    </div>
+    <div v-if="areweloggedin === false">
+      <p v-bind:style='{fontSize:"16pt"}'> Woops! Looks like you did not log in.</p>
+    </div>
+    <div v-if="areweloggedin === true" v-bind:style='{textAlign:"center", width:"100vw", display:"flex", flexDirection:"row"}'>
       <div v-bind:style='{flex: "1", textAlign:"center"}'/>
-      <div v-bind:style='{flex: "1", textAlign:"center"}'>
+      <div class='acc-shadow'>
         <gmap-map
           ref='map'
           :center="center"
-          :zoom="7"
+          :zoom="13"
           style="width: 60vw; height: 70vh;"
         >
           <gmap-info-window
@@ -49,14 +59,26 @@
         </gmap-map>
       </div>
       <div v-bind:style='{flex: "1", textAlign:"center"}'/>
-      <div v-bind:style='{flex: "1", textAlign:"center"}'>
-        <div class='shadow-10 bg-blue-2' v-bind:style='{height: "70vh", width:
+      <div class='acc-shadow bg-white'>
+        <div class='bg-white' v-bind:style='{height: "70vh", width:
         "25vw"}'>
           <div v-if="markerclicked === false">
-            <br/>
-            <p v-bind:style='{fontSize:"16pt"}'>
-              Click a marker to change its' details!
-            </p>
+
+            <div class='listing-container'>
+              <q-btn class='add-btn' big v-on:click="addMarker()">
+                Add Marker
+              </q-btn>
+              <listing
+                v-for="item in listings"
+                v-bind:name="item.name"
+                v-bind:bed="item.bed"
+                v-bind:price="item.price"
+                v-bind:sqft="item.sqft"
+                v-bind:lat="item.lat"
+                v-bind:lng="item.lng"
+                v-bind:updated_by="item.updated_by"
+              ></listing>
+            </div>
           </div>
           <div v-if="markerclicked === true">
             <br/>
@@ -100,9 +122,6 @@
                 Great! Click on the map yo!
               </p>
             </div>
-            <q-btn color="blue-5" big v-on:click="addMarker()">
-              Add Marker
-            </q-btn>
           </div>
         </div>
       </div>
@@ -116,6 +135,8 @@
 import { mapGetters, mapActions } from 'vuex';
 import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps';
+import listing from '@/Listing'
+import axios from 'axios';
 
 import {
   QBtn,
@@ -146,11 +167,14 @@ export default {
     QIcon,
     QField,
     QTooltip,
-    QPopover
+    QPopover,
+    listing
   },
   data () {
     return {
       msg: 'Welcome to the 🗺 Page',
+      alert1: true,
+      alert2: true,
       glistener: null,
       addmarkertomap: false,
       areweloggedin: false,
@@ -180,18 +204,28 @@ export default {
         }
       },
       infowindowposition: null,
-      center: {lat: 10.0, lng: 10.0},
-      markers: [{
-        position: {lat: 10.0, lng: 10.0, bdr: 2, price: 1000, whose: "ours"}
-      }, {
-        position: {lat: 11.0, lng: 11.0, bdr: 1, price: 500, whose: "frenemy1"}
-      }]
+      center: {lat: 30.2849, lng: -97.7341},
+      markers: [
+        // position: {lat: 11.0, lng: 11.0, bdr: 1, price: 500, whose: "frenemy1"}
+      ],
+      listings: []
     }
   },
   created: function () {
     if (this.userName!=null&&this.userPass!=null){
       this.areweloggedin=true;
     }
+
+    axios.get("http://129.146.134.34:5000/api/listing/")
+    .then(response => {
+      this.listings = response.data.listings
+
+      for(var i = 0; i < this.listings.length; i++) {
+        this.markers.push( {
+          position: {lat: this.listings[i].lat, lng: this.listings[i].lng, bdr: this.listings[i].bed, price: this.listings[i].price, whose: this.listings[i].name}
+        })
+      }
+    })
   },
   computed: {
    ...mapGetters([
@@ -286,5 +320,46 @@ li {
 }
 a {
   color: #42b983;
+}
+.alert {
+  background-color: #184270;
+  width: 90%;
+  margin: 20px auto;
+  height: 40px;
+  border-radius: 4px;
+}
+.acc-shadow {
+  flex: 1;
+  text-align: center;
+  box-shadow: 2px 4px 8px 0px rgba(46,61,73,0.4);
+}
+.alert-title {
+  text-align: left;
+  padding: 10px 20px;
+  font-size: 20px;
+  color: #fff;
+}
+.alert-x {
+  color: #fff;
+  float: right;
+  font-size: 18px;
+}
+.alert-x:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+.alert-dark {
+  background-color: #a30909;
+}
+.listing-container {
+  overflow: auto;
+  height: 70vh;
+  width: 25vw;
+}
+.add-btn {
+  background-color: #184270;
+  color: #fff;
+  margin: 16px auto;
+  width: 80%;
 }
 </style>
